@@ -4,13 +4,16 @@ import com.up42.chanllenge.dataaccessobject.FeatureRepository;
 import com.up42.chanllenge.domainobject.FeatureDO;
 import com.up42.chanllenge.exception.EntityNotFoundException;
 import com.up42.chanllenge.service.FeatureService;
+import com.up42.chanllenge.util.BlobConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * This is a class that services the endpoint's requests
+ */
 @Service
 public class DefaultFeatureService implements FeatureService
 {
@@ -45,9 +48,8 @@ public class DefaultFeatureService implements FeatureService
     {
         FeatureDO feature =
             featureRepository.findById(featureId).orElseThrow(() -> new EntityNotFoundException("Could not find entity with id: " + featureId));
-        Blob blob = feature.getQuicklook();
-        byte[] bytes = blob.getBytes(1, (int) blob.length());
-        blob.free();
-        return bytes;
+        // Here we convert the Blob to byte array and return it.
+        // The initial idea was to returned a BufferedImage, but this is much faster as it seems in this use case.
+        return BlobConverter.convertBlobToByteArray(feature.getQuicklook());
     }
 }

@@ -3,7 +3,6 @@ package com.up42.chanllenge.controller.mapper;
 import com.up42.chanllenge.datatransferobject.FeatureDTO;
 import com.up42.chanllenge.domainobject.FeatureDO;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 

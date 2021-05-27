@@ -1,11 +1,12 @@
 package com.up42.chanllenge.domainobject;
 
-import org.hibernate.Hibernate;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Blob;
 
+/**
+ * This represents a feature.
+ */
 @Entity
 @Table(
     name = "feature",
@@ -13,18 +14,23 @@ import java.sql.Blob;
 )
 public class FeatureDO
 {
+    @NotNull(message = "id can not be null!")
     @Id
     @Column(nullable = false)
-    @NotNull(message = "License plate type can not be null!")
     private String id;
+    @NotNull(message = "timestamp can not be null!")
     @Column(nullable = false)
     private Long timestamp;
+    @NotNull(message = "beginViewingDate can not be null!")
     @Column(nullable = false)
     private Long beginViewingDate;
+    @NotNull(message = "endViewingDate can not be null!")
     @Column(nullable = false)
     private Long endViewingDate;
+    @NotNull(message = "missionName can not be null!")
     @Column(nullable = false)
     private String missionName;
+    @NotNull(message = "quicklook can not be null!")
     @Column(nullable = false)
     @Lob
     private Blob quicklook;
@@ -81,9 +87,4 @@ public class FeatureDO
         return missionName;
     }
 
-
-    public void setMissionName(String missionName)
-    {
-        this.missionName = missionName;
-    }
 }

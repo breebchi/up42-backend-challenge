@@ -20,6 +20,7 @@ public class Up42CodingChallengeApplication
     }
 
 
+    // This is Swagger specific
     @Bean
     public Docket docket()
     {

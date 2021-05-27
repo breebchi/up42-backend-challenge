@@ -9,9 +9,13 @@ import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * This rest controllers presents endpoints to be called upon to acquire a resource.
+ */
 @RestController
 @Validated
 @RequestMapping("v1/features")
@@ -28,7 +32,7 @@ public class FeatureController
 
 
     @GetMapping("/{id}")
-    public FeatureDTO findFeature(@PathVariable String id) throws EntityNotFoundException
+    public FeatureDTO findFeature(@PathVariable @NotNull String id) throws EntityNotFoundException
     {
         return FeatureMapper.makeFeatureDTO(featureService.find(id));
     }
@@ -43,7 +47,7 @@ public class FeatureController
 
     @GetMapping(value = "/{id}/quicklook",
         produces = MediaType.IMAGE_PNG_VALUE)
-    public @ResponseBody byte[] getQuickLook(@PathVariable String id) throws EntityNotFoundException, SQLException
+    public @ResponseBody byte[] getQuickLook(@PathVariable @NotNull String id) throws EntityNotFoundException, SQLException
     {
         return featureService.getQuickLook(id);
     }

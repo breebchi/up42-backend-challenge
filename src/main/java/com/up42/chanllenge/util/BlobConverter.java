@@ -1,12 +1,14 @@
 package com.up42.chanllenge.util;
 
 import org.hibernate.engine.jdbc.BlobProxy;
-import org.springframework.stereotype.Component;
 
 import java.sql.Blob;
 import java.sql.SQLException;
 
-public class BlobStringInterConverter
+/**
+ * This class presents logic to convert to or from a blob.
+ */
+public class BlobConverter
 {
 
     public static Blob convertStringToBlob(String str)
@@ -23,6 +25,8 @@ public class BlobStringInterConverter
 
     public static byte[] convertBlobToByteArray(Blob blb) throws SQLException
     {
-        return blb.getBytes(1, (int) blb.length());
+        byte[] bytes = blb.getBytes(1, (int) blb.length());
+        blb.free();
+        return bytes;
     }
 }
